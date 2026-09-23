@@ -31,4 +31,8 @@ public class GewinnModel {
     public int getRundenErgebnis() {
         return rundenErgebnis;
     }
+    // Erzeugt und speichert eine neue Computerzahl
+    public void berechneComputerZahl() {
+        computerZahl = (int) (Math.random() * 9) + 1;
+    }
 }
