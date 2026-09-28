@@ -7,7 +7,12 @@ public class GewinnView extends JFrame {
 
     // Zeigt den gesamten Punktestand
     private JLabel lblPunkte;
-
+    // Eingabefeld für die Zahl des Spielers
+    private JTextField txtSpieler;
+    // Zeigt die zufällige Computerzahl
+    private JTextField txtComputer;
+    // Bereitet die nächste Runde vor
+    private JButton btnNochmal;
     public GewinnView() {
         // Titel des Fensters
         super("Zahlen-Gewinnspiel (v1.0)");
@@ -48,7 +53,43 @@ public class GewinnView extends JFrame {
 
         // Das Panel oben im Fenster platzieren
         add(oben, BorderLayout.NORTH);
+        // Mittlerer Bereich mit zwei Zeilen und zwei Spalten
+        JPanel mitte = new JPanel(new GridLayout(2, 2, 10, 10));
 
+        // Beschriftungen über den Zahlenfeldern
+        mitte.add(new JLabel("Deine Zahl:", SwingConstants.CENTER));
+        mitte.add(new JLabel("Computer:", SwingConstants.CENTER));
+
+        // Erstellt beide Zahlenfelder
+        txtSpieler = new JTextField();
+        txtComputer = new JTextField();
+
+        // Die Computerzahl darf nicht selbst eingegeben werden
+        txtComputer.setEditable(false);
+
+        // Zahlen mittig anzeigen
+        txtSpieler.setHorizontalAlignment(JTextField.CENTER);
+        txtComputer.setHorizontalAlignment(JTextField.CENTER);
+
+        // Große Schrift für beide Zahlenfelder
+        Font zahlenSchrift = new Font("SansSerif", Font.BOLD, 48);
+        txtSpieler.setFont(zahlenSchrift);
+        txtComputer.setFont(zahlenSchrift);
+
+        // Zahlenfelder zum mittleren Bereich hinzufügen
+        mitte.add(txtSpieler);
+        mitte.add(txtComputer);
+
+        // Mittleren Bereich im Fenster platzieren
+        add(mitte, BorderLayout.CENTER);
+
+        // FlowLayout platziert den Button mittig
+        JPanel unten = new JPanel(new FlowLayout());
+
+        // Button erstellen und unten hinzufügen
+        btnNochmal = new JButton("Noch einmal!");
+        unten.add(btnNochmal);
+        add(unten, BorderLayout.SOUTH);
         // Fenster auf dem Bildschirm zentrieren
         setLocationRelativeTo(null);
     }
