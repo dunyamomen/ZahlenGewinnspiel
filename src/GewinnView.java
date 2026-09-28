@@ -90,6 +90,8 @@ public class GewinnView extends JFrame {
 
         // Button erstellen und unten hinzufügen
         btnNochmal = new JButton("Noch einmal!");
+        // Erst nach einer gespielten Runde anklickbar
+        btnNochmal.setEnabled(false);
         unten.add(btnNochmal);
         add(unten, BorderLayout.SOUTH);
         // Zeigt den Startpunktestand aus dem Model
@@ -109,7 +111,10 @@ public class GewinnView extends JFrame {
                     txtSpieler.setText("");
                     txtComputer.setText("");
                     lblErgebnis.setText("Tippe eine Zahl von 1 bis 9");
-
+                    // Erlaubt die Eingabe für die nächste Runde
+                    txtSpieler.setEditable(true);
+                    // Sperrt den Button bis zur nächsten Auswertung
+                    btnNochmal.setEnabled(false);
                     // Setzt den Cursor zurück ins Eingabefeld
                     txtSpieler.requestFocusInWindow();
                 });
@@ -138,9 +143,14 @@ public class GewinnView extends JFrame {
             lblErgebnis.setText("Bitte eine ganze Zahl von 1 bis 9 eingeben!");
         }
     }
-
     // Zeigt die aktuellen Ergebnisse des Models an
     private void aktualisiereAnzeige() {
+        // Sperrt das Zahlenfeld nach einer Runde
+        txtSpieler.setEditable(false);
+
+        // Aktiviert den Button für die nächste Runde
+        btnNochmal.setEnabled(true);
+
         txtComputer.setText("" + controller.getComputerZahl());
         lblErgebnis.setText("Rundenpunkte: " + controller.getRundenErgebnis());
         lblPunkte.setText("Gesamtpunkte: " + controller.getGesamtPunkte());
