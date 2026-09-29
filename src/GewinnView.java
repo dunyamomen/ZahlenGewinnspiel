@@ -109,7 +109,11 @@ public class GewinnView extends JFrame {
 
                     // Gesamtpunkte bleiben erhalten
                     txtSpieler.setText("");
+
                     txtComputer.setText("");
+                    // Setzt die Rundenanzeige für die nächste Runde auf weiß
+                    lblErgebnis.setBackground(Color.WHITE);
+
                     lblErgebnis.setText("Tippe eine Zahl von 1 bis 9");
                     // Erlaubt die Eingabe für die nächste Runde
                     txtSpieler.setEditable(true);
@@ -148,17 +152,28 @@ public class GewinnView extends JFrame {
         // Sperrt das Zahlenfeld nach einer Runde
         txtSpieler.setEditable(false);
 
-        // Aktiviert den Button für die nächste Runde
+// Aktiviert den Button für die nächste Runde
         btnNochmal.setEnabled(true);
+        // Positive Rundenpunkte werden grün angezeigt
+        if (controller.getRundenErgebnis() > 0) {
+            lblErgebnis.setBackground(Color.GREEN);
+        } else {
+            // Negative Rundenpunkte werden rot angezeigt
+            lblErgebnis.setBackground(Color.RED);
+        }
 
+        // Die Gesamtpunkte bleiben während des Spiels weiß
+        lblPunkte.setBackground(Color.WHITE);
         txtComputer.setText("" + controller.getComputerZahl());
         lblErgebnis.setText("Rundenpunkte: " + controller.getRundenErgebnis());
         lblPunkte.setText("Gesamtpunkte: " + controller.getGesamtPunkte());
 
         // Ergänzt beim Spielende eine passende Nachricht
         if (controller.hatGewonnen()) {
+            lblPunkte.setBackground(Color.GREEN);
             lblPunkte.setText("Gewonnen! Punkte: " + controller.getGesamtPunkte());
         } else if (controller.hatVerloren()) {
+            lblPunkte.setBackground(Color.RED);
             lblPunkte.setText("Verloren! Punkte: " + controller.getGesamtPunkte());
         }
     }
