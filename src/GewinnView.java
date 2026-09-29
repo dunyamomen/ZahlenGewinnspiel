@@ -127,6 +127,10 @@ public class GewinnView extends JFrame {
     }
     // Liest die Eingabe und übergibt sie dem Controller
     private void spieleRunde() {
+        // Verhindert eine weitere Auswertung vor "Noch einmal"
+        if (!txtSpieler.isEditable()) {
+            return;
+        }
         // Nach dem Spielende keine weitere Eingabe auswerten
         if (controller.hatGewonnen() || controller.hatVerloren()) {
             return;
